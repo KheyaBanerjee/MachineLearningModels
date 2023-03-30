@@ -1,0 +1,19 @@
+from sklearn.ensemble import VotingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn import svm
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+
+# Any number &/or type of models can be used
+model_1 = LogisticRegression(solver='liblinear', random_state=42, class_weight='balanced')
+model_2 = svm.SVC(kernel='linear', probability=True)
+model_3 = RandomForestClassifier(n_estimators = 500, criterion = 'gini', class_weight='balanced')
+ 
+final_model = VotingClassifier(estimators=[('lr', model_1), ('svm', model_2), ('rf', model_3)], voting='hard')
+ 
+final_model.fit(X_train, y_train)
+pred_final = final_model.predict(X_test)
+print(classification_report(y_test, pred_final))
+print(confusion_matrix(y_test, pred_final))
+print(classifier.predict_proba(X_test))
