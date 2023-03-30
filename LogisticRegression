@@ -2,6 +2,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 
+# The parameter 'solver' value can be changed to 'sag', 'saga', 'liblinear'
 classifier = LogisticRegression(solver = 'sag', random_state = 42, class_weight='balanced') 
 classifier.fit(X_train, y_train.values.ravel())
 y_pred = classifier.predict(X_test) 
