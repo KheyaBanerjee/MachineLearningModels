@@ -1,0 +1,12 @@
+from sklearn.multiclass import OneVsRestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+
+# Instead of LogisticRegression, any other classifier can be used; but actually they are not required - as the classifiers itself has multiclass capability
+classifier = OneVsRestClassifier(LogisticRegression(solver = 'liblinear', random_state = 42, class_weight='balanced'))
+classifier.fit(X_train, y_train.values.ravel())
+y_pred = classifier.predict(X_test) 
+print(classification_report(y_val, y_pred))
+print(confusion_matrix(y_val, y_pred))
+print(classifier.predict_proba(X_val))
