@@ -1,0 +1,33 @@
+from scikeras.wrappers import KerasClassifier
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
+
+# If it is a binary classification, output will always be 1
+def NeuralNetworkModel(inputdim = inputs, output = 1):
+    mymodel = Sequential() 
+    mymodel.add(Dense(8000, input_dim=inputdim, activation='relu'))    
+    mymodel.add(Dense(4000, activation='relu')) #1    
+    mymodel.add(Dense(2000, activation='relu')) #2    
+    mymodel.add(Dense(1000, activation='relu')) #3    
+    mymodel.add(Dense(500, activation='relu')) #4    
+    mymodel.add(Dense(250, activation='relu')) #5    
+    mymodel.add(Dense(100, activation='relu')) #6    
+    mymodel.add(Dense(64, activation='relu')) #7    
+    mymodel.add(Dense(32, activation='relu')) #8    
+    mymodel.add(Dense(16, activation='relu')) #9    
+    mymodel.add(Dense(8, activation='relu')) #10      
+    mymodel.add(Dense(output, activation='sigmoid'))
+    
+    # Compile the model, use binary_crossentropy as loss function
+    mymodel.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+    mymodel.optimizer.learning_rate = 0.001 
+    return mymodel
+
+# create model
+nn = KerasClassifier(build_fn = NeuralNetworkModel)
+x_train = X_train[:].to_numpy()
+
+batchSize, epochs = 512, 12
+history = nn.fit(x_train, y_train, epochs = epochs, batch_size = batchSize)
+y_pred = nn.predict(x_test)
