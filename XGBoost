@@ -1,5 +1,6 @@
 import xgboost as xgb
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import classification_report
 
 le = LabelEncoder()
 le.fit(df['ColumnOfResult'])
