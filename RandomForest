@@ -1,0 +1,7 @@
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+
+classifier = RandomForestClassifier(n_estimators = 500, criterion = 'gini', class_weight ='balanced') 
+classifier.fit(X_train, y_train)
+y_pred = classifier.predict(X_test) 
+print(classification_report(y_test, y_pred))
